@@ -1,0 +1,41 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.action.extension" value="action" />
+
+	<package name="default" extends="struts-default" namespace="">
+		<interceptors>
+	<interceptor name="authenticationInterceptor" class="com.pandey.interceptors.AuthenticationInterceptor"/>
+	<interceptor-stack name="secureStack">
+		<interceptor-ref name="authenticationInterceptor"/>
+		<interceptor-ref name="defaultStack"/>
+	</interceptor-stack>
+	</interceptors>
+	
+	
+		<action name="dologin"
+				class="com.pandey.action.LoginAction">
+			<result name="success" type="redirectAction">
+       	 		<param name="actionName">homepage</param>
+       	 		<param name="namespace">/action</param>
+    		</result>
+    		<result name="input">/Login/Login.html</result>
+		</action>
+    	<action name="logout"
+						class="com.pandey.action.LogoutAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">dologin</param>
+       	 		<param name="namespace">/action</param>
+			</result>
+    	</action>
+    	
+    	<action name="homepage">
+    		<interceptor-ref name="secureStack"/>
+    		<result>/Pages/HomePage.html</result>
+    		<result name="login">/Login/Login.html</result>
+    	</action>
+	</package>
+</struts>
