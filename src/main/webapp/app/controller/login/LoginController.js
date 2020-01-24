@@ -28,7 +28,7 @@ Ext.define('SL.controller.login.LoginController', {
 				loginForm.submit({
 							url : 'dologin.action',
 							success : function() {
-								alert("Success");
+								//alert("Success");
 							},
 							failure : function(form, action) {
 								alert('Failed to Login');
