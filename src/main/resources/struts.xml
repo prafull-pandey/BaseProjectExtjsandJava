@@ -3,10 +3,10 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.action.extension" value="action" />
 
-	<package name="default" extends="struts-default" namespace="">
+	<!--<package name="default" extends="struts-default" namespace="">
 		<interceptors>
 	<interceptor name="authenticationInterceptor" class="com.pandey.interceptors.AuthenticationInterceptor"/>
 	<interceptor-stack name="secureStack">
@@ -14,7 +14,7 @@
 		<interceptor-ref name="defaultStack"/>
 	</interceptor-stack>
 	</interceptors>
-	
+
 	
 		<action name="dologin"
 				class="com.pandey.action.LoginAction">
@@ -32,10 +32,20 @@
 			</result>
     	</action>
     	
-    	<action name="homepage">
-    		<interceptor-ref name="secureStack"/>
-    		<result>/Pages/HomePage.html</result>
-    		<result name="login">/Login/Login.html</result>
-    	</action>
+
+	</package>-->
+	<package name="default" namespace="" extends="json-default">
+		<action name="populateComponentDummyDataAction" class="com.pandey.action.PopulateComponentDummyDataAction">
+			<result type="json" >
+				<param name="root">
+					gridbeanList
+				</param>
+			</result>
+		</action>
+		<action name="homepage">
+			<!--<interceptor-ref name="secureStack"/>-->
+			<result>/Pages/HomePage.html</result>
+			<!--<result name="login">/Login/Login.html</result>-->
+		</action>
 	</package>
 </struts>

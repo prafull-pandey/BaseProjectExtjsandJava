@@ -5,10 +5,14 @@ Ext.application({
 			controllers : ['MainController'],
 			launch : function() {
 				Ext.create('Ext.container.Viewport', {
-							layout : 'fit',
+							layout : {
+                                        type : 'vbox',
+                                        align : 'center',
+                                        pack : 'center'
+                                    },
 							items : [{
 										xtype : 'homePage',
-										width : 400
+										width : 600
 									}]
 						});
 			}
